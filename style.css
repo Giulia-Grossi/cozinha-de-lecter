@@ -1,0 +1,315 @@
+:root {
+    /* Cores principais */
+    --cor-fundo:        #0e0b0b;      /* Preto quase absoluto */
+    --cor-fundo-card:   #1a1212;      /* Fundo dos cards */
+    --cor-fundo-alt:    #140f0f;      /* Fundo alternativo de seções */
+    --cor-menu:         #7a0000;      /* Vermelho escuro do menu */
+    --cor-menu-hover:   #9b0000;      /* Vermelho mais claro ao hover */
+    --cor-destaque:     #c0392b;      /* Vermelho destaque */
+    --cor-texto:        #e8ddd0;      /* Bege claro — texto principal */
+    --cor-texto-suave:  #a89880;      /* Bege acinzentado — texto secundário */
+    --cor-borda:        #3a2020;      /* Bordas sutis */
+    --cor-sombra:       rgba(0,0,0,0.7);
+
+    /* Tipografia */
+    --fonte-titulo:     'Playfair Display', Georgia, serif;
+    --fonte-corpo:      'EB Garamond', 'Times New Roman', serif;
+
+    /* Espaçamentos */
+    --altura-menu:      70px;
+    --raio-card:        6px;
+    --transicao:        0.3s ease;
+}
+
+/* ---------- Reset e variáveis globais ---------- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: var(--fonte-corpo);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--cor-destaque);
+    text-decoration: none;
+    transition: color var(--transicao);
+}
+
+a:hover {
+    color: #e74c3c;
+}
+
+
+/* ============================================================
+   MENU HORIZONTAL FIXO NO TOPO
+   ============================================================ */
+#menu-topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--altura-menu);
+    background-color: var(--cor-menu);
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+}
+
+/* Logo / Nome do site */
+#menu-topo .logo {
+    font-family: var(--fonte-titulo);
+    font-size: 1.6rem;
+    font-style: italic;
+    color: var(--cor-texto);
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+#menu-topo .logo span {
+    color: #ffcdd2; /* Detalhe em rosa claro */
+}
+
+/* Lista de navegação principal */
+#menu-topo nav ul {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+#menu-topo nav ul li a,
+#menu-topo nav ul li span.menu-link {
+    display: block;
+    padding: 0.55rem 1.1rem;
+    color: var(--cor-texto);
+    font-family: var(--fonte-titulo);
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color var(--transicao), color var(--transicao);
+    white-space: nowrap;
+}
+
+#menu-topo nav ul li a:hover,
+#menu-topo nav ul li span.menu-link:hover,
+#menu-topo nav ul li.ativo > a,
+#menu-topo nav ul li.ativo > span.menu-link {
+    background-color: var(--cor-menu-hover);
+    color: #fff;
+}
+
+/* ---------- Submenu de categorias ---------- */
+.submenu {
+    display: none;              /* Oculto por padrão */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #5a0000;  /* Vermelho ainda mais escuro */
+    min-width: 200px;
+    border-top: 2px solid var(--cor-destaque);
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 8px 20px var(--cor-sombra);
+    z-index: 999;
+}
+
+/* Exibe o submenu ao passar o mouse ou via JS */
+.tem-submenu:hover .submenu,
+.tem-submenu.aberto .submenu {
+    display: block;
+}
+
+.submenu li a {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    color: var(--cor-texto);
+    font-family: var(--fonte-corpo);
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    transition: background-color var(--transicao);
+}
+
+.submenu li:last-child a {
+    border-bottom: none;
+}
+
+.submenu li a:hover {
+    background-color: var(--cor-menu-hover);
+    color: #fff;
+}
+
+/* ================================
+   GRID DE CARDS DE RECEITAS
+   ================================ */
+.grid-receitas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.75rem;
+}
+
+/* ---------- Card individual ---------- */
+.card-receita {
+    background-color: var(--cor-fundo-card);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-card);
+    overflow: hidden;
+    transition: transform var(--transicao), box-shadow var(--transicao), border-color var(--transicao);
+    cursor: pointer;
+}
+
+.card-receita:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px var(--cor-sombra);
+    border-color: var(--cor-destaque);
+}
+
+/* Imagem do card */
+.card-receita .card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    filter: brightness(0.85) saturate(0.9);
+    transition: filter var(--transicao);
+}
+
+.card-receita:hover .card-img {
+    filter: brightness(1) saturate(1.1);
+}
+
+/* =================================
+   PÁGINA INDIVIDUAL DE RECEITA
+   ================================= */
+.pagina-receita {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.receita-header h1 {
+    font-style: italic;
+    margin-bottom: 0.75rem;
+}
+
+.receita-img-principal {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    filter: brightness(0.9) saturate(0.95);
+}
+
+/* Seções da receita */
+.receita-secao {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.receita-secao h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--cor-texto);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Ícone decorativo antes dos títulos de seção */
+.receita-secao h2::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 1.2em;
+    background-color: var(--cor-destaque);
+    border-radius: 2px;
+}
+
+/* Lista de ingredientes */
+.lista-ingredientes {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.4rem 1.5rem;
+}
+
+.lista-ingredientes li {
+    padding: 0.35rem 0;
+    border-bottom: 1px dashed var(--cor-borda);
+    font-size: 1rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+}
+
+.lista-ingredientes li::before {
+    content: '—';
+    color: var(--cor-destaque);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+/* Lista de passos do modo de preparo */
+.lista-passos {
+    list-style: none;
+    counter-reset: passo-contador;
+}
+
+.lista-passos li {
+    counter-increment: passo-contador;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.1rem;
+    align-items: flex-start;
+}
+
+.lista-passos li::before {
+    content: counter(passo-contador);
+    background-color: var(--cor-destaque);
+    color: #fff;
+    font-family: var(--fonte-titulo);
+    font-size: 0.85rem;
+    min-width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+}
+
+/* ===============================
+   RESPONSIVIDADE
+   =============================== */
+@media (max-width: 768px) {
+    :root {
+        --altura-menu: 60px;
+    }
+
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+
+    .hero h1 { font-size: 2.2rem; }
+
+    .grid-receitas {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+
+    .lista-ingredientes {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    #menu-topo .logo {
+        display: none; /* Oculta logo em telas muito pequenas */
+    }
+}
