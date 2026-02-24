@@ -1,100 +1,48 @@
 <?php
 /**
- * Este arquivo é incluído em todas as páginas com:
- *   <?php include 'php/header.php'; ?>
+ * Este arquivo contém o menu que aparece em TODAS as páginas.
+ * Ele é incluído com: <?php include 'php/header.php'; ?>
+ * 
+ * A variável $paginaAtiva define qual item do menu fica destacado.
+ * Valores: 'receitas', 'sobre', 'dicas'
  */
 
-// Define a página ativa se não foi definida antes do include. Valores aceitos: 'receitas', 'sobre', 'dicas'
+// Se $paginaAtiva não foi definida, usa valor padrão
 if (!isset($paginaAtiva)) {
     $paginaAtiva = '';
 }
-
-// Determina o caminho base para os links (útil se o site estiver em subdiretório)
-// Ajuste conforme necessário para o seu ambiente de hospedagem
-$basePath = '';
 ?>
 
 <!-- ============================================================
-     MENU HORIZONTAL FIXO — Presente em todas as páginas
+     MENU FIXO NO TOPO
      ============================================================ -->
 <header id="menu-topo">
     <div class="menu-inner">
-
-        <!-- Nome / Logo do site -->
-        <a href="<?= $basePath ?>index.php" class="logo">
+        
+        <!-- Logo / Nome do site -->
+        <a href="index.php" class="logo">
             Cozinha de <span>Lecter</span>
         </a>
 
         <!-- Navegação principal -->
-        <nav aria-label="Navegação principal">
+        <nav>
             <ul>
-
-                <!-- Item: Receitas (com submenu de categorias) -->
-                <li class="tem-submenu <?= ($paginaAtiva === 'receitas') ? 'ativo' : '' ?>">
-                    
-                    <!-- O span abre/fecha o submenu via CSS hover e JS click -->
-                    <span class="menu-link" 
-                          onclick="toggleSubmenu(this)"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                          role="button"
-                          tabindex="0">
-                        Receitas
-                    </span>
-
-                    <!-- Submenu de categorias — preenchido pelo JavaScript (main.js) -->
-                    <ul class="submenu" id="submenu-categorias" aria-label="Categorias de receitas">
-                        <!-- Os itens são gerados dinamicamente pelo JS -->
-                        <!-- Veja a função inicializarSubmenu() em main.js -->
-                    </ul>
-
+                <!-- Link: Receitas -->
+                <li class="<?= ($paginaAtiva === 'receitas') ? 'ativo' : '' ?>">
+                    <a href="index.php">Receitas</a>
                 </li>
 
-                <!-- Item: Sobre -->
+                <!-- Link: Sobre -->
                 <li class="<?= ($paginaAtiva === 'sobre') ? 'ativo' : '' ?>">
-                    <a href="<?= $basePath ?>sobre.php">Sobre</a>
+                    <a href="sobre.php">Sobre</a>
                 </li>
 
-                <!-- Item: Dicas -->
+                <!-- Link: Dicas -->
                 <li class="<?= ($paginaAtiva === 'dicas') ? 'ativo' : '' ?>">
-                    <a href="<?= $basePath ?>dicas.php">Dicas</a>
+                    <a href="dicas.php">Dicas</a>
                 </li>
-
             </ul>
         </nav>
 
     </div>
 </header>
-
-<!-- Script inline para controle do submenu via clique (mobile) -->
-<script>
-    /**
-     * Alterna a abertura do submenu via clique.
-     * O hover já é tratado pelo CSS; este handler é para toque/clique.
-     */
-    function toggleSubmenu(el) {
-        const li = el.closest('.tem-submenu');
-        const isAberto = li.classList.contains('aberto');
-        
-        // Fecha todos os submenus abertos
-        document.querySelectorAll('.tem-submenu.aberto').forEach(item => {
-            item.classList.remove('aberto');
-            item.querySelector('[aria-expanded]').setAttribute('aria-expanded', 'false');
-        });
-        
-        // Abre o clicado (se estava fechado)
-        if (!isAberto) {
-            li.classList.add('aberto');
-            el.setAttribute('aria-expanded', 'true');
-        }
-    }
-
-    // Fecha o submenu ao clicar fora
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.tem-submenu')) {
-            document.querySelectorAll('.tem-submenu.aberto').forEach(item => {
-                item.classList.remove('aberto');
-            });
-        }
-    });
-</script>

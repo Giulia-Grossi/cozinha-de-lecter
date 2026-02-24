@@ -1,0 +1,614 @@
+/* ============================================================
+   IMPORTAÇÃO DE FONTES
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+/* ============================================================
+   VARIÁVEIS CSS (CORES E ESPAÇAMENTOS)
+   ============================================================ */
+:root {
+    /* Cores principais */
+    --cor-fundo:        #0e0b0b;      /* Preto quase absoluto */
+    --cor-fundo-card:   #1a1212;      /* Fundo dos cards */
+    --cor-fundo-alt:    #140f0f;      /* Fundo alternativo */
+    --cor-menu:         #7a0000;      /* Vermelho escuro do menu */
+    --cor-menu-hover:   #9b0000;      /* Vermelho hover */
+    --cor-destaque:     #c0392b;      /* Vermelho destaque */
+    --cor-texto:        #e8ddd0;      /* Bege claro */
+    --cor-texto-suave:  #a89880;      /* Bege acinzentado */
+    --cor-borda:        #3a2020;      /* Bordas sutis */
+    
+    /* Tipografia */
+    --fonte-titulo:     'Playfair Display', Georgia, serif;
+    --fonte-corpo:      'EB Garamond', 'Times New Roman', serif;
+    
+    /* Espaçamentos */
+    --altura-menu:      70px;
+    --transicao:        0.3s ease;
+}
+
+/* ============================================================
+   RESET E ESTILOS GLOBAIS
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: var(--fonte-corpo);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--cor-destaque);
+    text-decoration: none;
+    transition: color var(--transicao);
+}
+
+a:hover {
+    color: #e74c3c;
+}
+
+/* ============================================================
+   TIPOGRAFIA
+   ============================================================ */
+h1, h2, h3, h4, h5 {
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--cor-texto);
+}
+
+h1 { font-size: 2.6rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.2rem; }
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* ============================================================
+   LAYOUT GERAL
+   ============================================================ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Espaço para compensar o menu fixo */
+.conteudo-principal {
+    padding-top: calc(var(--altura-menu) + 30px);
+    padding-bottom: 60px;
+    min-height: calc(100vh - var(--altura-menu));
+}
+
+/* ============================================================
+   MENU FIXO NO TOPO
+   ============================================================ */
+#menu-topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--altura-menu);
+    background-color: var(--cor-menu);
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+}
+
+#menu-topo .menu-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Logo */
+#menu-topo .logo {
+    font-family: var(--fonte-titulo);
+    font-size: 1.6rem;
+    font-style: italic;
+    color: var(--cor-texto);
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+#menu-topo .logo span {
+    color: #ffcdd2;
+}
+
+/* Links do menu */
+#menu-topo nav ul {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+}
+
+#menu-topo nav ul li a {
+    display: block;
+    padding: 0.55rem 1.1rem;
+    color: var(--cor-texto);
+    font-family: var(--fonte-titulo);
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    border-radius: 3px;
+    transition: background-color var(--transicao), color var(--transicao);
+}
+
+#menu-topo nav ul li a:hover,
+#menu-topo nav ul li.ativo a {
+    background-color: var(--cor-menu-hover);
+    color: #fff;
+}
+
+/* ============================================================
+   HERO / BANNER
+   ============================================================ */
+.hero {
+    text-align: center;
+    padding: 3rem 1.5rem 2.5rem;
+    border-bottom: 1px solid var(--cor-borda);
+    margin-bottom: 2.5rem;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-style: italic;
+    margin-bottom: 0.75rem;
+}
+
+.hero p {
+    font-size: 1.15rem;
+    color: var(--cor-texto-suave);
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.divisor {
+    width: 80px;
+    height: 2px;
+    background: var(--cor-destaque);
+    margin: 1.2rem auto;
+}
+
+/* ============================================================
+   FILTRO DE CATEGORIAS
+   ============================================================ */
+.filtro-categorias {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.filtro-categorias a {
+    background-color: var(--cor-fundo-card);
+    border: 1px solid var(--cor-borda);
+    color: var(--cor-texto-suave);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all var(--transicao);
+}
+
+.filtro-categorias a:hover,
+.filtro-categorias a.ativo {
+    background-color: var(--cor-destaque);
+    border-color: var(--cor-destaque);
+    color: #fff;
+}
+
+/* ============================================================
+   GRID DE CARDS DE RECEITAS
+   ============================================================ */
+.grid-receitas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.75rem;
+    margin-bottom: 2rem;
+}
+
+.card-receita {
+    background-color: var(--cor-fundo-card);
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform var(--transicao), box-shadow var(--transicao), border-color var(--transicao);
+    cursor: pointer;
+}
+
+.card-receita:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    border-color: var(--cor-destaque);
+}
+
+/* Imagem do card */
+.card-receita img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    filter: brightness(0.85) saturate(0.9);
+    transition: filter var(--transicao);
+}
+
+.card-receita:hover img {
+    filter: brightness(1) saturate(1.1);
+}
+
+/* Placeholder de imagem */
+.card-img-placeholder {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #2a1010, #1a0a0a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--cor-borda);
+}
+
+/* Corpo do card */
+.card-corpo {
+    padding: 1.1rem 1.25rem 1.4rem;
+}
+
+.card-episodio {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--cor-texto-suave);
+    letter-spacing: 0.5px;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+}
+
+.card-titulo {
+    font-size: 1.2rem;
+    font-style: italic;
+    margin-bottom: 0.6rem;
+}
+
+.card-categoria {
+    display: inline-block;
+    background-color: rgba(192, 57, 43, 0.2);
+    border: 1px solid rgba(192, 57, 43, 0.4);
+    color: #e57373;
+    font-size: 0.78rem;
+    padding: 0.15rem 0.6rem;
+    border-radius: 3px;
+}
+
+/* ============================================================
+   PÁGINA INDIVIDUAL DE RECEITA
+   ============================================================ */
+.pagina-receita {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.receita-header {
+    margin-bottom: 2rem;
+}
+
+.receita-header .episodio {
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.receita-header h1 {
+    font-style: italic;
+    margin-bottom: 0.75rem;
+}
+
+.receita-header .categoria {
+    display: inline-block;
+    background-color: rgba(192, 57, 43, 0.2);
+    border: 1px solid rgba(192, 57, 43, 0.4);
+    color: #e57373;
+    font-size: 0.85rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 3px;
+}
+
+/* Imagem principal */
+.receita-img-principal {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    filter: brightness(0.9) saturate(0.95);
+}
+
+.receita-img-placeholder {
+    width: 100%;
+    height: 350px;
+    background: linear-gradient(135deg, #2a1010, #1a0a0a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: var(--cor-borda);
+    border-radius: 4px;
+    margin-bottom: 2rem;
+}
+
+/* Seções da receita */
+.receita-secao {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.receita-secao:last-child {
+    border-bottom: none;
+}
+
+.receita-secao h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.receita-secao h2::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 1.2em;
+    background-color: var(--cor-destaque);
+    border-radius: 2px;
+}
+
+/* Lista de ingredientes */
+.lista-ingredientes {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.4rem 1.5rem;
+}
+
+.lista-ingredientes li {
+    padding: 0.35rem 0;
+    border-bottom: 1px dashed var(--cor-borda);
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+}
+
+.lista-ingredientes li::before {
+    content: '—';
+    color: var(--cor-destaque);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+/* Lista de passos */
+.lista-passos {
+    list-style: none;
+    counter-reset: passo-contador;
+}
+
+.lista-passos li {
+    counter-increment: passo-contador;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.1rem;
+    align-items: flex-start;
+}
+
+.lista-passos li::before {
+    content: counter(passo-contador);
+    background-color: var(--cor-destaque);
+    color: #fff;
+    font-family: var(--fonte-titulo);
+    font-size: 0.85rem;
+    min-width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+}
+
+/* Bloco de curiosidade */
+.bloco-curiosidade {
+    background-color: var(--cor-fundo-alt);
+    border-left: 3px solid var(--cor-destaque);
+    padding: 1.25rem 1.5rem;
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+    color: var(--cor-texto-suave);
+}
+
+.bloco-curiosidade strong {
+    display: block;
+    font-style: normal;
+    color: var(--cor-texto);
+    margin-bottom: 0.4rem;
+    font-family: var(--fonte-titulo);
+}
+
+/* Botão voltar */
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--cor-texto-suave);
+    font-size: 0.95rem;
+    margin-bottom: 1.75rem;
+    transition: color var(--transicao);
+}
+
+.btn-voltar:hover {
+    color: var(--cor-destaque);
+}
+
+/* ============================================================
+   PÁGINA SOBRE
+   ============================================================ */
+.pagina-sobre {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.pagina-sobre h1 {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.pagina-sobre .subtitulo {
+    color: var(--cor-texto-suave);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.placeholder-texto {
+    background-color: var(--cor-fundo-alt);
+    border: 1px dashed var(--cor-borda);
+    padding: 2rem;
+    border-radius: 4px;
+    color: var(--cor-texto-suave);
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* ============================================================
+   PÁGINA DICAS
+   ============================================================ */
+.pagina-dicas {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.aviso-dicas {
+    background-color: rgba(192, 57, 43, 0.1);
+    border: 1px solid rgba(192, 57, 43, 0.3);
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: var(--cor-texto-suave);
+    font-style: italic;
+}
+
+.lista-riscos {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.lista-riscos li {
+    background-color: var(--cor-fundo-card);
+    border: 1px solid var(--cor-borda);
+    border-left: 4px solid var(--cor-destaque);
+    padding: 1rem 1.25rem;
+    border-radius: 0 4px 4px 0;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.risco-numero {
+    font-family: var(--fonte-titulo);
+    font-size: 1.5rem;
+    color: var(--cor-destaque);
+    opacity: 0.5;
+    min-width: 2rem;
+    line-height: 1;
+}
+
+.risco-conteudo strong {
+    display: block;
+    font-family: var(--fonte-titulo);
+    margin-bottom: 0.25rem;
+    color: var(--cor-texto);
+}
+
+.risco-conteudo p {
+    font-size: 0.95rem;
+    color: var(--cor-texto-suave);
+    margin: 0;
+}
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+footer {
+    background-color: #0a0707;
+    border-top: 1px solid var(--cor-borda);
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--cor-texto-suave);
+    font-style: italic;
+}
+
+footer span {
+    color: var(--cor-destaque);
+}
+
+/* ============================================================
+   RESPONSIVIDADE
+   ============================================================ */
+@media (max-width: 768px) {
+    :root {
+        --altura-menu: 60px;
+    }
+
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.6rem; }
+
+    .hero h1 { font-size: 2.2rem; }
+
+    #menu-topo nav ul {
+        gap: 0;
+    }
+
+    #menu-topo nav ul li a {
+        padding: 0.5rem 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .grid-receitas {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+
+    .lista-ingredientes {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    #menu-topo .logo {
+        display: none;
+    }
+}
