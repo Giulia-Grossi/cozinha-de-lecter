@@ -1,6 +1,18 @@
--- ============================================================
 -- Este script cria o banco de dados, as tabelas e insere
 -- as 10 receitas com seus ingredientes e passos de preparo.
+-- 
+-- RECEITAS ATUALIZADAS CONFORME SOLICITADO:
+-- T1EP1 - Aperitif: Beef Bourguignonne
+-- T1EP2 - Amuse-Bouche: Amuse-Bouche
+-- T1EP4 - Oeuf: Eggs with Sausages
+-- T1EP6 - Entree: Wine Jelly
+-- T1EP8 - Fromage: Paella on the Rocks
+-- T1EP9 - Trou Normand: Tenderloin and Lotus
+-- T1EP10 - Buffet Froid: Jamon Iberico
+-- T1EP11 - Roti: Curried Chitterlings
+-- T1EP12 - Releves: Silkie Soup
+-- T3EP13 - The Wrath of The Lamb: Grand Fruit and Flower Garnished Kalua-Roast Leg
+
 -- ============================================================
 
 -- Criar banco de dados
@@ -14,39 +26,36 @@ USE cozinha_lecter;
 -- ============================================================
 -- TABELA: RECEITAS
 -- ============================================================
--- Armazena as informações principais de cada receita
 CREATE TABLE IF NOT EXISTS receitas (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    episodio VARCHAR(100) NOT NULL,          -- Ex: "T1E01 — Apéritif"
-    titulo VARCHAR(200) NOT NULL,            -- Nome da receita
-    categoria VARCHAR(50) NOT NULL,          -- Categoria (entradas, sopas, etc)
-    imagem VARCHAR(255),                     -- Caminho da imagem (pode ser NULL)
-    descricao LONGTEXT NOT NULL,             -- Análise cinematográfica
-    curiosidade LONGTEXT NOT NULL,           -- Nota cultural/histórica
+    episodio VARCHAR(100) NOT NULL,
+    titulo VARCHAR(200) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    imagem VARCHAR(255),
+    descricao LONGTEXT NOT NULL,
+    curiosidade LONGTEXT NOT NULL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ============================================================
 -- TABELA: INGREDIENTES
 -- ============================================================
--- Armazena os ingredientes de cada receita
 CREATE TABLE IF NOT EXISTS ingredientes (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    receita_id INT NOT NULL,                 -- ID da receita (referência)
-    descricao VARCHAR(255) NOT NULL,         -- Descrição do ingrediente
-    ordem INT NOT NULL,                      -- Ordem de exibição
+    receita_id INT NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
+    ordem INT NOT NULL,
     FOREIGN KEY (receita_id) REFERENCES receitas(id) ON DELETE CASCADE
 );
 
 -- ============================================================
 -- TABELA: PASSOS_PREPARO
 -- ============================================================
--- Armazena os passos do modo de preparo de cada receita
 CREATE TABLE IF NOT EXISTS passos_preparo (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    receita_id INT NOT NULL,                 -- ID da receita (referência)
-    descricao TEXT NOT NULL,                 -- Descrição do passo
-    ordem INT NOT NULL,                      -- Ordem de exibição
+    receita_id INT NOT NULL,
+    descricao TEXT NOT NULL,
+    ordem INT NOT NULL,
     FOREIGN KEY (receita_id) REFERENCES receitas(id) ON DELETE CASCADE
 );
 
@@ -54,337 +63,349 @@ CREATE TABLE IF NOT EXISTS passos_preparo (
 -- INSERIR RECEITAS
 -- ============================================================
 
--- RECEITA 1: Ovo Escalfado com Aspargos e Presunto de Parma
+-- RECEITA 1: Beef Bourguignonne
 INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidade) VALUES (
-    'T1E01 — Apéritif',
-    'Ovo Escalfado com Aspargos e Presunto de Parma',
-    'entradas',
+    'T1EP1 — Aperitif',
+    'Beef Bourguignonne',
+    'pratos-principais',
     NULL,
-    'No episódio piloto da série, Hannibal Lecter é apresentado ao espectador não como um monstro, mas como um anfitrião refinado e um chef de talento excepcional. A primeira cena em que o vemos cozinhando estabelece o tom para toda a série: a câmera se move lentamente enquanto Hannibal prepara um ovo escalfado com precisão cirúrgica, cada movimento deliberado e elegante. O ovo, com sua gema intacta e tremulante, representa a fragilidade e a beleza que Hannibal vê em seus pratos — e, por extensão, em suas vítimas. O episódio "Apéritif" (Aperitivo) é um convite para entrar no mundo de Hannibal, e este prato é o primeiro gosto daquilo que está por vir.',
-    'O ovo escalfado (ou poché) é uma técnica francesa que data do século XV, originalmente desenvolvida para preservar ovos sem casca em períodos de escassez. A técnica requer precisão: a água deve estar na temperatura exata (entre 80-90°C), e o ovo deve ser deslizado delicadamente para evitar que a clara se disperse. O presunto de Parma, com sua história de 2000 anos, é considerado um dos presuntos mais refinados do mundo, curado naturalmente com ar das montanhas de Emília-Romanha. A combinação de ovo escalfado com presunto é um clássico da culinária francesa, frequentemente servido em brunch elegantes.'
+    'No episódio piloto "Aperitif", Hannibal Lecter é apresentado ao espectador não como um monstro, mas como um chef de talento excepcional. A primeira cena em que o vemos cozinhando estabelece o tom para toda a série: a câmera se move lentamente enquanto Hannibal prepara um Beef Bourguignonne com precisão cirúrgica. Este é um prato clássico da culinária francesa, que requer paciência, técnica e uma compreensão profunda dos sabores. O vinho tinto, a carne macia, os legumes caramelizados — tudo é uma metáfora para a sofisticação de Hannibal, que mascara algo muito mais sinistro por baixo.',
+    'Beef Bourguignonne é um prato clássico da região de Borgonha, na França, que remonta ao século XVI. Historicamente, era um prato de camponeses que aproveitava cortes de carne menos nobres e os transformava em algo extraordinário através de cozimento lento e vinho. A técnica de braising (cozimento em molho) permite que a carne se torne extremamente macia enquanto absorve os sabores do vinho, das ervas e dos legumes. O prato ganhou fama internacional através do livro "Mastering the Art of French Cooking" de Julia Child, publicado em 1961.'
 );
 
 -- Ingredientes da receita 1
 INSERT INTO ingredientes (receita_id, descricao, ordem) VALUES
-(1, '4 ovos frescos', 1),
-(1, '8 talos de aspargo verde', 2),
-(1, '4 fatias de presunto de Parma', 3),
-(1, '2 colheres de sopa de vinagre branco', 4),
-(1, '1 colher de sopa de manteiga', 5),
-(1, 'Sal e pimenta-do-reino a gosto', 6),
-(1, 'Água filtrada (1 litro)', 7);
+(1, '1,5kg de carne de vaca (chuck ou brisket), cortada em cubos', 1),
+(1, '200g de bacon, cortado em cubos', 2),
+(1, '3 cenouras médias, cortadas em bastões', 3),
+(1, '2 cebolas médias, cortadas em quartos', 4),
+(1, '250g de cogumelos inteiros', 5),
+(1, '4 dentes de alho, minados', 6),
+(1, '750ml de vinho tinto de qualidade', 7),
+(1, '500ml de caldo de carne', 8),
+(1, '2 colheres de sopa de pasta de tomate', 9),
+(1, '2 folhas de louro', 10),
+(1, '3 ramos de tomilho fresco', 11),
+(1, '2 colheres de sopa de azeite', 12),
+(1, 'Sal, pimenta-do-reino e farinha de trigo a gosto', 13);
 
 -- Passos da receita 1
 INSERT INTO passos_preparo (receita_id, descricao, ordem) VALUES
-(1, 'Aqueça uma panela funda com água e o vinagre branco até quase ferver (80-90°C). O vinagre ajuda a coagular a clara do ovo.', 1),
-(1, 'Enquanto isso, grelhe os aspargos em frigideira com manteiga até ficarem ligeiramente macios, cerca de 4-5 minutos. Tempere com sal e pimenta.', 2),
-(1, 'Quebre cada ovo individualmente em uma xícara pequena ou tigela. Isso facilita o deslizamento suave na água.', 3),
-(1, 'Crie um redemoinho suave na água com uma colher. Deslize o ovo no centro do redemoinho — a clara se enrolará ao redor da gema.', 4),
-(1, 'Cozinhe por 3-4 minutos, até que a clara fique opaca mas a gema permaneça mole. Retire com escumadeira.', 5),
-(1, 'Monte o prato: disponha os aspargos, sobreponha o presunto de Parma em dobras elegantes e coloque o ovo escalfado no topo.', 6),
-(1, 'Finalize com uma pitada de sal, pimenta-do-reino moída na hora e um fio de azeite extra virgem.', 7);
+(1, 'Pré-aqueça o forno a 160°C.', 1),
+(1, 'Em uma panela grande, frite o bacon até ficar crocante. Retire e reserve.', 2),
+(1, 'Na mesma panela com a gordura do bacon, sele a carne em lotes até ficar dourada de todos os lados. Retire e reserve.', 3),
+(1, 'Adicione as cebolas e cenouras à panela. Refogue até ficarem ligeiramente caramelizadas, cerca de 5 minutos.', 4),
+(1, 'Adicione o alho e a pasta de tomate. Mexa bem e cozinhe por 2 minutos.', 5),
+(1, 'Polvilhe farinha sobre os legumes e mexa para criar um roux (pasta espessante).', 6),
+(1, 'Despeje o vinho tinto e raspe os sucos caramelizados do fundo da panela com uma colher de madeira.', 7),
+(1, 'Adicione o caldo de carne, a carne reservada, o bacon, as folhas de louro e o tomilho.', 8),
+(1, 'Leve a fogo alto até ferver, depois cubra e coloque no forno por 2,5 a 3 horas, até a carne estar muito macia.', 9),
+(1, 'Retire do forno e adicione os cogumelos. Cozinhe no forno por mais 30 minutos.', 10),
+(1, 'Tempere com sal e pimenta. Sirva quente com batatas ou pão fresco.', 11);
 
 -- ============================================================
 
--- RECEITA 2: Potage de Raízes com Creme Fraîche
+-- RECEITA 2: Amuse-Bouche
 INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidade) VALUES (
-    'T1E03 — Potage',
-    'Potage de Raízes com Creme Fraîche',
-    'sopas',
+    'T1EP2 — Amuse-Bouche',
+    'Amuse-Bouche',
+    'entradas',
     NULL,
-    'O episódio "Potage" marca um ponto de virada na série, onde Hannibal começa a tecer sua teia ao redor de Will Graham. A sopa que ele prepara é uma metáfora visual para a complexidade e profundidade do personagem: camadas de sabor, texturas que se complementam, e uma elegância que mascara algo mais sinistro. A câmera se detém nos ingredientes sendo cortados com precisão, cada fatia uma obra de arte. A sopa fumegante, servida em uma tigela branca imaculada, é tanto um convite quanto uma ameaça — um gesto de hospitalidade que oculta intenções muito mais sombrias.',
-    'O potage é uma categoria de sopas francesas que remonta ao século XVII, quando era considerado um prato de elite. A palavra vem do francês "pot" (panela), sugerindo que era cozido em um único recipiente. Historicamente, o potage era feito com legumes da estação, caldo e, frequentemente, carne. A adição de creme fraîche não apenas enriquece o sabor, mas também adiciona uma textura aveludada que era altamente valorizada na culinária clássica francesa. Raízes como cenoura, nabo e batata são símbolos de rusticidade e terra — uma ironia interessante quando preparadas por alguém tão refinado quanto Hannibal.'
+    'Em "Amuse-Bouche", Hannibal prepara um pequeno apertivo — uma entrada que é tanto uma demonstração de técnica quanto um convite para o que está por vir. O amuse-bouche é um conceito francês que significa literalmente "diversão para a boca" — um pequeno prato servido antes do menu principal, projetado para despertar o paladar e estabelecer o tom para a refeição. Para Hannibal, é também um ato de sedução, uma forma de ganhar a confiança de seus convidados através da culinária.',
+    'O amuse-bouche é uma tradição da alta culinária francesa que ganhou popularidade no século XX. É um prato que não aparece no menu — é uma surpresa oferecida pelo chef. O objetivo é criar uma primeira impressão memorável, demonstrando a criatividade e a técnica do chef. Um verdadeiro amuse-bouche é pequeno (geralmente apenas um ou dois bocados), visualmente impressionante, e oferece uma explosão de sabor. Para Hannibal, o amuse-bouche é uma metáfora perfeita: pequeno, refinado, e potencialmente perigoso.'
 );
 
 -- Ingredientes da receita 2
 INSERT INTO ingredientes (receita_id, descricao, ordem) VALUES
-(2, '3 cenouras médias, descascadas e cortadas em cubos', 1),
-(2, '2 nabos médios, descascados e cortados em cubos', 2),
-(2, '2 batatas médias, descascadas e cortadas em cubos', 3),
-(2, '1 cebola grande, picada', 4),
-(2, '4 dentes de alho, minados', 5),
-(2, '1 litro de caldo de legumes (ou água)', 6),
-(2, '200ml de creme fraîche', 7),
-(2, '2 colheres de sopa de manteiga', 8),
-(2, 'Sal, pimenta-do-reino e noz-moscada a gosto', 9);
+(2, '100g de foie gras de qualidade premium', 1),
+(2, '50g de geleia de porto', 2),
+(2, '4 fatias finas de pão de centeio tostado', 3),
+(2, '30g de trufas negras raladas', 4),
+(2, '20ml de azeite trufa', 5),
+(2, 'Flor de sal e pimenta-do-reino a gosto', 6),
+(2, 'Microgreens para decoração', 7);
 
 -- Passos da receita 2
 INSERT INTO passos_preparo (receita_id, descricao, ordem) VALUES
-(2, 'Derreta a manteiga em uma panela grande. Refogue a cebola e o alho até ficarem macios e aromáticos, cerca de 3 minutos.', 1),
-(2, 'Adicione os cubos de cenoura, nabo e batata. Mexa bem para cobrir com a manteiga. Cozinhe por 5 minutos.', 2),
-(2, 'Despeje o caldo de legumes. Leve a fogo alto até ferver, depois reduza para fogo médio.', 3),
-(2, 'Cozinhe por 20-25 minutos, até que todos os legumes estejam muito macios.', 4),
-(2, 'Retire do fogo e deixe esfriar ligeiramente. Usando um liquidificador ou processador, bata a sopa até ficar completamente suave.', 5),
-(2, 'Retorne a sopa à panela. Aquça em fogo baixo e adicione o creme fraîche, mexendo constantemente.', 6),
-(2, 'Tempere com sal, pimenta-do-reino e uma pitada de noz-moscada. Cozinhe por mais 2 minutos.', 7),
-(2, 'Sirva quente, com um fio de azeite extra virgem e talvez um pouco de creme fraîche fresco no topo.', 8);
+(2, 'Retire o foie gras do refrigerador 15 minutos antes de servir para que fique ligeiramente macio.', 1),
+(2, 'Coloque uma pequena quantidade de geleia de porto no centro de cada fatia de pão tostado.', 2),
+(2, 'Coloque uma pequena quantidade de foie gras sobre a geleia, usando uma colher aquecida.', 3),
+(2, 'Polvilhe trufas negras raladas sobre o foie gras.', 4),
+(2, 'Regue com azeite trufa e finalize com flor de sal e pimenta-do-reino.', 5),
+(2, 'Decore com microgreens. Sirva imediatamente.', 6);
 
 -- ============================================================
 
--- RECEITA 3: Vieiras Gratinadas à Saint-Jacques
+-- RECEITA 3: Eggs with Sausages
 INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidade) VALUES (
-    'T1E05 — Coquilles',
-    'Vieiras Gratinadas à Saint-Jacques',
-    'frutos-do-mar',
+    'T1EP4 — Oeuf',
+    'Eggs with Sausages',
+    'entradas',
     NULL,
-    'Em "Coquilles" (Conchas), Hannibal prepara um prato que é tanto uma celebração da culinária francesa quanto uma declaração de sua sofisticação. As vieiras, com sua textura delicada e sabor sutil, são apresentadas em suas conchas naturais — um toque teatral que Hannibal adora. A câmera captura o dourado perfeito do gratim, o vapor subindo das conchas, a precisão com que o prato é montado. É um momento de pura beleza culinária, mas também de tensão: sabemos que por trás dessa elegância há algo muito mais perturbador. O prato é um espelho da própria natureza de Hannibal: belo, refinado, e potencialmente mortal.',
-    'As vieiras (Pecten maximus) têm sido consideradas um iguaria desde a Idade Média, quando os peregrinos que viajavam para Santiago de Compostela as usavam como símbolo de sua jornada. A concha da vieira tornou-se um ícone religioso e culinário. O prato "Coquilles Saint-Jacques" (Vieiras de São Tiago) é um clássico francês que combina vieiras com um molho cremoso, frequentemente gratinado com pão ralado e queijo. A técnica de grelhar vieiras requer precisão: cozimento excessivo as torna borrachudas, enquanto cozimento insuficiente deixa a textura desagradável. É um prato que separa os chefs amadores dos profissionais.'
+    'Em "Oeuf" (Ovo), Hannibal prepara um prato que é simultaneamente simples e sofisticado: ovos com salsichas. O episódio marca um ponto de virada na série, onde os crimes de Hannibal começam a se tornar mais evidentes. O prato é um contraste interessante — ovos são símbolos de pureza e novo começo, enquanto as salsichas sugerem algo mais terreno e potencialmente sinistro. Para Hannibal, é um prato que captura essa dualidade: beleza e horror entrelaçados.',
+    'Ovos e salsichas são uma combinação clássica que aparece em culinarias de todo o mundo. Em França, as salsichas de qualidade (como a saucisse de Toulouse) são frequentemente servidas com ovos preparados de várias formas. A qualidade das salsichas é crucial — uma boa salsicha deve ter uma proporção equilibrada de carne, gordura e temperos. Hannibal, é claro, insistiria em salsichas de qualidade excepcional, preparadas com precisão e servidas com técnica impecável.'
 );
 
 -- Ingredientes da receita 3
 INSERT INTO ingredientes (receita_id, descricao, ordem) VALUES
-(3, '12 vieiras grandes, limpas', 1),
-(3, '100g de manteiga', 2),
-(3, '3 dentes de alho, minados', 3),
-(3, '200ml de vinho branco seco', 4),
-(3, '200ml de caldo de peixe', 5),
-(3, '100ml de creme de leite', 6),
-(3, '50g de pão ralado', 7),
-(3, '50g de queijo parmesão ralado', 8),
-(3, 'Sal, pimenta-do-reino e suco de limão a gosto', 9);
+(3, '4 ovos frescos', 1),
+(3, '4 salsichas de qualidade premium (Toulouse ou similar)', 2),
+(3, '2 colheres de sopa de manteiga', 3),
+(3, '1 colher de sopa de azeite', 4),
+(3, '2 dentes de alho, minados', 5),
+(3, '50g de cogumelos fatiados', 6),
+(3, 'Sal, pimenta-do-reino e ervas frescas a gosto', 7);
 
 -- Passos da receita 3
 INSERT INTO passos_preparo (receita_id, descricao, ordem) VALUES
-(3, 'Pré-aqueça o forno a 200°C. Limpe as conchas das vieiras com água fria e seque bem com papel toalha.', 1),
-(3, 'Em uma panela, derreta 50g de manteiga e refogue o alho até ficar aromático, cerca de 1 minuto.', 2),
-(3, 'Adicione o vinho branco e deixe reduzir pela metade, cerca de 3 minutos.', 3),
-(3, 'Despeje o caldo de peixe e cozinhe por mais 5 minutos. Adicione o creme de leite e mexa bem.', 4),
-(3, 'Tempere a mistura com sal, pimenta e suco de limão. Reserve.', 5),
-(3, 'Coloque as vieiras em uma assadeira. Distribua o molho sobre cada vieira.', 6),
-(3, 'Em uma tigela, misture o pão ralado, queijo parmesão e o restante da manteiga derretida.', 7),
-(3, 'Polvilhe a mistura de pão sobre cada vieira. Asse por 12-15 minutos, até que o topo fique dourado.', 8),
-(3, 'Sirva imediatamente, enquanto ainda está quente e o gratim está crocante.', 9);
+(3, 'Aqueça uma frigideira em fogo médio-alto. Adicione as salsichas e cozinhe até ficarem douradas de todos os lados, cerca de 8-10 minutos. Reserve.', 1),
+(3, 'Na mesma frigideira, derreta 1 colher de sopa de manteiga. Refogue os cogumelos com alho até ficarem macios, cerca de 4 minutos. Reserve.', 2),
+(3, 'Adicione o restante da manteiga à frigideira. Quebre os ovos cuidadosamente e cozinhe até o ponto desejado (frito, sunny-side up, etc.).', 3),
+(3, 'Tempere os ovos com sal e pimenta. Coloque as salsichas e cogumelos ao redor dos ovos.', 4),
+(3, 'Decore com ervas frescas (salsa, cebolinha) e sirva imediatamente em um prato quente.', 5);
 
 -- ============================================================
 
--- RECEITA 4: Sorbet de Limão-Siciliano com Hortelã
+-- RECEITA 4: Wine Jelly
 INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidade) VALUES (
-    'T1E07 — Sorbet',
-    'Sorbet de Limão-Siciliano com Hortelã',
+    'T1EP6 — Entree',
+    'Wine Jelly',
     'sobremesas',
     NULL,
-    'O episódio "Sorbet" é um interlúdio de leveza em uma série cada vez mais sombria. Hannibal prepara um sorbet — um palato limpador tradicional da culinária francesa — que é tanto uma demonstração de técnica quanto um momento de respiro. A câmera captura os cristais de gelo se formando, a cor amarela vibrante do limão, a frescura da hortelã. É um prato que representa a dualidade de Hannibal: refinado e sofisticado na superfície, mas com uma frieza subjacente. O sorbet, afinal, é feito de gelo — e há algo de gelado no coração de Hannibal que nenhuma quantidade de culinária refinada pode aquecer.',
-    'O sorbet é uma sobremesa gelada que remonta ao século XVI, quando era um luxo exclusivo da realeza europeia. Originalmente feito com neve das montanhas, o sorbet era um símbolo de status e riqueza. O sorbet de limão é particularmente tradicional na Sicília, onde o limão-siciliano (Citrus limon) é cultivado há séculos. O limão-siciliano é conhecido por sua acidez equilibrada e seu aroma intenso. Historicamente, o sorbet era servido entre pratos em jantares de múltiplos cursos para "limpar o palato" — uma função que persiste até hoje na culinária refinada.'
+    'Em "Entree", Hannibal prepara uma geleia de vinho — um prato que é tanto uma sobremesa quanto uma obra de arte. A geleia de vinho é translúcida, delicada, e captura a essência do vinho em forma sólida. O episódio marca um momento em que Hannibal começa a revelar mais de sua verdadeira natureza, e a geleia de vinho é uma metáfora perfeita: algo que parece frágil na superfície, mas que possui uma estrutura interna complexa e bem definida.',
+    'A geleia de vinho é um prato clássico da culinária francesa que remonta ao século XVIII. Historicamente, era feita com gelatina animal (caldo de ossos reduzido) e vinho, criando um prato que era tanto uma demonstração de técnica quanto de riqueza — pois gelatina era cara e trabalhosa de produzir. A geleia de vinho é frequentemente servida como uma sobremesa elegante em jantares refinados, e é um prato que requer precisão e paciência.'
 );
 
 -- Ingredientes da receita 4
 INSERT INTO ingredientes (receita_id, descricao, ordem) VALUES
-(4, '6 limões-sicilianos grandes', 1),
-(4, '200g de açúcar', 2),
-(4, '500ml de água filtrada', 3),
-(4, '30ml de xarope simples (açúcar + água)', 4),
-(4, 'Folhas de hortelã fresca', 5),
-(4, 'Sal a gosto', 6);
+(4, '500ml de vinho tinto de qualidade', 1),
+(4, '200ml de caldo de carne (para gelatina)', 2),
+(4, '100g de açúcar', 3),
+(4, '1 pau de canela', 4),
+(4, '3 cravos-da-índia', 5),
+(4, '2 folhas de gelatina (ou 1 colher de chá de gelatina em pó)', 6),
+(4, 'Suco de 1 limão', 7),
+(4, 'Frutas vermelhas para decoração (opcional)', 8);
 
 -- Passos da receita 4
 INSERT INTO passos_preparo (receita_id, descricao, ordem) VALUES
-(4, 'Esprema os limões para obter 300ml de suco fresco. Reserve também as cascas para decoração.', 1),
-(4, 'Em uma panela, combine a água e o açúcar. Leve ao fogo e mexa até o açúcar dissolver completamente.', 2),
-(4, 'Deixe o xarope esfriar completamente (cerca de 30 minutos).', 3),
-(4, 'Misture o suco de limão fresco com o xarope resfriado. Adicione uma pitada de sal.', 4),
-(4, 'Se tiver uma sorveteira, siga as instruções do fabricante. Caso contrário, despeje a mistura em uma assadeira rasa e coloque no congelador.', 5),
-(4, 'A cada 30 minutos, retire do congelador e misture com um garfo para quebrar os cristais. Repita 3-4 vezes até obter uma textura cremosa.', 6),
-(4, 'Sirva em taças geladas, decorado com folhas de hortelã fresca e, se desejar, uma fatia fina de limão.', 7);
+(4, 'Se usar gelatina em folhas, hidrate em água fria por 5 minutos. Se usar em pó, reserve.', 1),
+(4, 'Em uma panela, combine o vinho tinto, caldo de carne, açúcar, canela e cravos. Leve ao fogo e deixe ferver por 5 minutos.', 2),
+(4, 'Retire do fogo e deixe esfriar ligeiramente. Coe para remover a canela e os cravos.', 3),
+(4, 'Adicione a gelatina hidratada ao vinho morno, mexendo bem até dissolver completamente.', 4),
+(4, 'Adicione o suco de limão. Despeje em taças ou formas.', 5),
+(4, 'Refrigere por pelo menos 4 horas até ficar firme.', 6),
+(4, 'Se desejar, decore com frutas vermelhas frescas. Sirva gelado.', 7);
 
 -- ============================================================
 
--- RECEITA 5: Kaiseki — Menu Degustação Japonês
+-- RECEITA 5: Paella on the Rocks
 INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidade) VALUES (
-    'T2E01 — Kaiseki',
-    'Kaiseki — Menu Degustação Japonês',
+    'T1EP8 — Fromage',
+    'Paella on the Rocks',
     'pratos-principais',
     NULL,
-    'Na segunda temporada, Hannibal leva a culinária a um novo nível com um menu Kaiseki — a forma mais elevada da culinária tradicional japonesa. O episódio "Kaiseki" é uma celebração visual da precisão, do equilíbrio e da harmonia — valores centrais tanto do Kaiseki quanto da filosofia de Hannibal. Cada prato é apresentado com reverência, cada movimento é calculado, cada sabor é uma declaração. A câmera se move lentamente através de cada curso, capturando a beleza de cada prato. É um momento em que a série transcende o crime e se torna uma meditação sobre a arte, a beleza e a obsessão.',
-    'O Kaiseki é a forma mais refinada da culinária tradicional japonesa, desenvolvida durante a era Edo (1603-1868) como acompanhamento para a cerimônia do chá. A palavra "Kaiseki" significa literalmente "pedra no peito" — referindo-se à prática de monges budistas de colocar pedras quentes em seus peitos para aliviar a fome durante meditações prolongadas. Um menu Kaiseki típico consiste de 8-12 cursos, cada um preparado com ingredientes sazonais e apresentado com cuidado extremo. Cada prato é uma obra de arte, tanto visualmente quanto no paladar. A filosofia do Kaiseki enfatiza o equilíbrio, a harmonia e o respeito pelos ingredientes — valores que, ironicamente, Hannibal compartilha, mesmo que de forma distorcida.'
+    'Em "Fromage" (Queijo), Hannibal prepara uma paella em pedras — um prato que combina a culinária espanhola com uma técnica teatral. O uso de pedras quentes para cozinhar é uma técnica antiga que adiciona um elemento de drama e espetáculo à apresentação. A paella em si é um prato de abundância e comunidade, mas quando preparada por Hannibal, torna-se uma declaração de seu domínio absoluto sobre a culinária e sobre aqueles ao seu redor.',
+    'A paella é um prato tradicional da região de Valência, na Espanha, que remonta ao século XVIII. Historicamente, era um prato de camponeses que aproveitava ingredientes locais — arroz, legumes, frutos do mar. A paella ganhou fama internacional e é agora considerada um símbolo da culinária espanhola. A técnica de cozinhar em pedras quentes é uma variação moderna que adiciona um elemento de espetáculo e dramaticidade à apresentação. O prato é frequentemente servido em jantares de grupo, o que o torna perfeito para Hannibal — uma forma de reunir suas vítimas em torno de uma mesa.'
 );
 
--- Ingredientes da receita 5 (Simplificado - um curso representativo)
+-- Ingredientes da receita 5
 INSERT INTO ingredientes (receita_id, descricao, ordem) VALUES
-(5, '200g de peixe branco fresco (como robalo ou linguado)', 1),
-(5, '100g de legumes sazonais (cenoura, abóbora, broto de bambu)', 2),
-(5, '50ml de molho dashi (caldo de peixe japonês)', 3),
-(5, '1 colher de chá de mirin (vinho de arroz adoçado)', 4),
-(5, '1 colher de chá de shoyu (molho de soja)', 5),
-(5, 'Wasabi e gengibre em conserva para acompanhamento', 6),
-(5, 'Alga nori para decoração', 7);
+(5, '300g de arroz bomba ou paella', 1),
+(5, '200g de frutos do mar mistos (camarão, mexilhão, lula)', 2),
+(5, '150g de frango, cortado em cubos', 3),
+(5, '100g de pimentão vermelho, cortado em tiras', 4),
+(5, '100g de ervilha fresca', 5),
+(5, '1 cebola média, picada', 6),
+(5, '4 dentes de alho, minados', 7),
+(5, '750ml de caldo de frango ou peixe', 8),
+(5, '100ml de vinho branco', 9),
+(5, '1 colher de chá de açafrão', 10),
+(5, '3 colheres de sopa de azeite', 11),
+(5, 'Sal, pimenta e limão a gosto', 12);
 
 -- Passos da receita 5
 INSERT INTO passos_preparo (receita_id, descricao, ordem) VALUES
-(5, 'Prepare o dashi aquecendo água com kombu (alga) e bonito seco. Coe e reserve.', 1),
-(5, 'Corte o peixe em fatias finas e precisas. A apresentação é tão importante quanto o sabor.', 2),
-(5, 'Cozinhe os legumes no dashi com mirin e shoyu até ficarem macios mas ainda com textura.', 3),
-(5, 'Disponha o peixe em um prato de cerâmica branca, cercado pelos legumes e seu caldo.', 4),
-(5, 'Decore com alga nori cortada em tiras finas e uma pequena quantidade de wasabi.', 5),
-(5, 'Sirva imediatamente, em temperatura adequada, com reverência e atenção aos detalhes visuais.', 6);
+(5, 'Aqueça o caldo em uma panela separada. Dissolva o açafrão no caldo quente.', 1),
+(5, 'Em uma panela grande (paellera), aqueça o azeite em fogo médio-alto. Refogue o frango até ficar dourado. Retire e reserve.', 2),
+(5, 'Na mesma panela, refogue a cebola e o alho até ficarem macios, cerca de 3 minutos.', 3),
+(5, 'Adicione o arroz e mexa bem para cobrir com o azeite. Cozinhe por 2 minutos.', 4),
+(5, 'Despeje o vinho branco e deixe reduzir quase completamente.', 5),
+(5, 'Adicione o caldo de açafrão gradualmente, mexendo ocasionalmente. O arroz deve absorver o líquido lentamente.', 6),
+(5, 'Quando o arroz estiver quase cozido, adicione o frango reservado, os frutos do mar, o pimentão e a ervilha.', 7),
+(5, 'Cozinhe até que o arroz esteja macio, os frutos do mar estejam cozidos e o líquido tenha sido absorvido, cerca de 5-7 minutos.', 8),
+(5, 'Tempere com sal, pimenta e suco de limão. Sirva diretamente da panela.', 9);
 
 -- ============================================================
 
--- RECEITA 6: Takiawase — Legumes Cozidos em Dashi
+-- RECEITA 6: Tenderloin and Lotus
 INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidade) VALUES (
-    'T2E04 — Takiawase',
-    'Takiawase — Legumes Cozidos em Dashi',
+    'T1EP9 — Trou Normand',
+    'Tenderloin and Lotus',
     'pratos-principais',
     NULL,
-    'O episódio "Takiawase" continua a exploração de Hannibal pela culinária japonesa, focando em um prato de legumes que é, à primeira vista, simples. Mas como tudo em Hannibal, há profundidade sob a superfície. O Takiawase é um exercício de contenção e controle — apenas os ingredientes mais finos, preparados com a técnica mais pura. A câmera captura o vapor subindo dos legumes, a cor vibrante de cada ingrediente, a perfeição da apresentação. É um prato que fala sobre a beleza encontrada na simplicidade, e sobre o controle absoluto que Hannibal exerce sobre tudo ao seu redor.',
-    'Takiawase é um prato tradicional do Kaiseki que consiste em legumes cozidos separadamente em dashi e depois apresentados juntos em um prato. A palavra "takiawase" significa literalmente "cozido junto", mas a técnica envolve cozinhar cada ingrediente individualmente para preservar seus sabores e texturas únicas. Cada legume é escolhido pela estação e pela sua representação simbólica. O Takiawase é um exercício de minimalismo e precisão — não há espaço para erro, não há lugar para esconder técnica inadequada. É a culinária no seu nível mais puro e mais desafiador.'
+    'Em "Trou Normand" (Buraco Normando), Hannibal prepara um filé mignon com raiz de lótus — um prato que combina a culinária francesa com influências asiáticas. O "trou normand" é tradicionalmente um interlúdio gelado (como um sorbet) servido entre pratos em um jantar de múltiplos cursos para "limpar o palato". Mas aqui, Hannibal subverte a tradição, criando um prato que é tanto uma homenagem quanto uma reinterpretação. O filé mignon é um corte nobre, e a raiz de lótus adiciona um elemento de exotismo e sofisticação.',
+    'O filé mignon é considerado o corte mais nobre da carne vermelha, conhecido por sua maciez e sabor delicado. A raiz de lótus (Nelumbo nucifera) é um ingrediente tradicional na culinária asiática, particularmente na culinária chinesa e japonesa. Tem um sabor ligeiramente adocicado e uma textura crocante quando cozida corretamente. A combinação de filé mignon com raiz de lótus é uma fusão criativa que demonstra a sofisticação culinária de Hannibal e sua disposição em explorar ingredientes de diferentes culturas.'
 );
 
 -- Ingredientes da receita 6
 INSERT INTO ingredientes (receita_id, descricao, ordem) VALUES
-(6, '100g de cenoura, cortada em formas decorativas', 1),
-(6, '100g de abóbora, cortada em cubos', 2),
-(6, '100g de broto de bambu, cortado em tiras', 3),
-(6, '100g de raiz de lótus, fatiada', 4),
-(6, '500ml de dashi (caldo de peixe japonês)', 5),
-(6, '2 colheres de sopa de mirin', 6),
-(6, '2 colheres de sopa de shoyu', 7),
-(6, 'Sal a gosto', 8);
+(6, '2 filés mignon (200g cada)', 1),
+(6, '300g de raiz de lótus fresca', 2),
+(6, '3 colheres de sopa de manteiga', 3),
+(6, '2 dentes de alho, minados', 4),
+(6, '100ml de vinho tinto', 5),
+(6, '100ml de caldo de carne', 6),
+(6, '1 colher de chá de gengibre fresco ralado', 7),
+(6, '1 colher de chá de molho de soja', 8),
+(6, 'Sal, pimenta-do-reino e óleo de gergelim a gosto', 9);
 
 -- Passos da receita 6
 INSERT INTO passos_preparo (receita_id, descricao, ordem) VALUES
-(6, 'Prepare o dashi fresco aquecendo água com kombu e bonito seco. Coe e reserve.', 1),
-(6, 'Em uma panela pequena, combine o dashi com mirin e shoyu. Leve ao fogo.', 2),
-(6, 'Cozinhe a cenoura primeiro (cerca de 5 minutos), depois retire e reserve.', 3),
-(6, 'Na mesma panela, cozinhe a abóbora (cerca de 5 minutos), depois retire e reserve.', 4),
-(6, 'Cozinhe o broto de bambu (cerca de 3 minutos), depois retire e reserve.', 5),
-(6, 'Cozinhe a raiz de lótus (cerca de 4 minutos), depois retire e reserve.', 6),
-(6, 'Disponha todos os legumes em um prato de cerâmica, cada um em seu próprio espaço. Despeje um pouco do caldo sobre cada ingrediente.', 7),
-(6, 'Sirva em temperatura adequada, com a apresentação visual sendo tão importante quanto o sabor.', 8);
+(6, 'Descasque a raiz de lótus e corte em fatias finas. Cozinhe em água com um pouco de vinagre por 5 minutos até ficar ligeiramente macia mas ainda crocante. Escorra.', 1),
+(6, 'Tempere os filés mignon com sal e pimenta. Aqueça uma frigideira em fogo alto com 1 colher de sopa de manteiga.', 2),
+(6, 'Sele os filés na frigideira por 3-4 minutos de cada lado (para carne média-rara). Retire e reserve.', 3),
+(6, 'Na mesma frigideira, derreta o restante da manteiga. Refogue o alho e o gengibre por 1 minuto.', 4),
+(6, 'Despeje o vinho tinto e raspe os sucos caramelizados do fundo. Deixe reduzir pela metade.', 5),
+(6, 'Adicione o caldo de carne e o molho de soja. Cozinhe por 2 minutos.', 6),
+(6, 'Retorne os filés à frigideira com a raiz de lótus. Cozinhe por mais 2 minutos.', 7),
+(6, 'Finalize com um fio de óleo de gergelim. Sirva quente.', 8);
 
 -- ============================================================
 
--- RECEITA 7: Carpaccio de Filé Mignon
+-- RECEITA 7: Jamon Iberico
 INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidade) VALUES (
-    'T2E10 — Naka-Choko',
-    'Carpaccio de Filé Mignon',
+    'T1EP10 — Buffet Froid',
+    'Jamon Iberico',
     'entradas',
     NULL,
-    'Em "Naka-Choko", Hannibal prepara um carpaccio — carne crua, fatiada finamente, apresentada com elegância. O prato é uma afirmação de confiança e controle: apenas a carne mais fina, preparada com a técnica mais pura. A câmera captura as fatias translúcidas de carne, o brilho do azeite, a cor vibrante dos acompanhamentos. É um prato que existe na fronteira entre a culinária refinada e algo mais perturbador — carne crua, servida com elegância, é tanto um prato sofisticado quanto um ato de violência contida. Para Hannibal, essa ambiguidade é precisamente o ponto.',
-    'O carpaccio é um prato italiano que remonta ao século XV, quando foi criado em Veneza. Originalmente feito com carne de carne vermelha fatiada finamente e servida crua com azeite, limão e sal, o carpaccio é um exercício de confiança — confiança na qualidade da carne, na higiene, na técnica. O prato foi nomeado em homenagem ao pintor renascentista Vittore Carpaccio, cujas pinturas apresentavam cores vermelhas e brancas vibrantes que lembravam o prato. Um verdadeiro carpaccio requer carne de qualidade excepcional, congelada ligeiramente para facilitar o corte em fatias ultrafinas, e apresentada com acompanhamentos mínimos que não ofusquem o sabor da carne.'
+    'Em "Buffet Froid" (Bufê Frio), Hannibal prepara presunto ibérico — um prato que é tão simples quanto sofisticado. O presunto ibérico é um ingrediente de qualidade excepcional que requer pouca preparação além de uma fatiação perfeita e uma apresentação elegante. O episódio marca um ponto em que Hannibal começa a revelar sua verdadeira natureza de forma mais aberta, e o presunto ibérico é uma metáfora perfeita: algo que parece simples na superfície, mas que possui uma complexidade e profundidade extraordinárias.',
+    'O presunto ibérico é um dos presuntos mais refinados do mundo, produzido a partir de porcos ibéricos criados em liberdade na Península Ibérica. O processo de cura pode levar de 2 a 10 anos, dependendo da qualidade desejada. O presunto ibérico de "pata negra" (feito de porcos com cascos pretos) é considerado o mais premium e é frequentemente servido em fatias ultrafinas como entrada em jantares refinados. A qualidade do presunto ibérico é tão alta que requer pouca preparação — apenas uma fatiação perfeita e uma apresentação elegante.'
 );
 
 -- Ingredientes da receita 7
 INSERT INTO ingredientes (receita_id, descricao, ordem) VALUES
-(7, '300g de filé mignon de qualidade excepcional, congelado ligeiramente', 1),
-(7, '100ml de azeite extra virgem de qualidade premium', 2),
-(7, '2 limões frescos', 3),
-(7, '50g de queijo parmesão em lascas', 4),
-(7, '50g de rúcula fresca', 5),
-(7, 'Sal marinho e pimenta-do-reino a gosto', 6),
-(7, 'Alcaparras e azeitonas para acompanhamento (opcional)', 7);
+(7, '200g de presunto ibérico de pata negra, fatiado ultrafino', 1),
+(7, '100g de melão fresco (opcional)', 2),
+(7, 'Pão tostado de qualidade', 3),
+(7, 'Azeite extra virgem premium', 4),
+(7, 'Flor de sal', 5);
 
 -- Passos da receita 7
 INSERT INTO passos_preparo (receita_id, descricao, ordem) VALUES
-(7, 'Congele o filé mignon por 1-2 horas até ficar ligeiramente firme, mas não completamente congelado.', 1),
-(7, 'Com uma faca muito afiada, corte o filé em fatias ultrafinas (cerca de 2-3mm). A técnica é crucial.', 2),
-(7, 'Disponha as fatias em um prato de porcelana branca, sobrepondo-as ligeiramente.', 3),
-(7, 'Regue com azeite extra virgem de qualidade premium. Esprema suco de limão fresco sobre a carne.', 4),
-(7, 'Tempere com sal marinho e pimenta-do-reino moída na hora.', 5),
-(7, 'Distribua lascas de queijo parmesão sobre a carne. Adicione rúcula fresca em torno do prato.', 6),
-(7, 'Se desejar, adicione alcaparras ou azeitonas como acompanhamento.', 7),
-(7, 'Sirva imediatamente, enquanto a carne ainda está fria.', 8);
+(7, 'Se o presunto foi refrigerado, retire 15 minutos antes de servir para que chegue à temperatura ambiente.', 1),
+(7, 'Disponha as fatias de presunto em um prato branco, dobradas elegantemente.', 2),
+(7, 'Se usar melão, corte em fatias finas e disponha ao lado do presunto.', 3),
+(7, 'Regue levemente com azeite extra virgem premium.', 4),
+(7, 'Polvilhe flor de sal sobre o presunto.', 5),
+(7, 'Sirva com pão tostado fresco. A apresentação visual é tão importante quanto o sabor.', 6);
 
 -- ============================================================
 
--- RECEITA 8: Antipasto della Casa
+-- RECEITA 8: Curried Chitterlings
 INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidade) VALUES (
-    'T3E01 — Antipasto',
-    'Antipasto della Casa',
-    'entradas',
+    'T1EP11 — Roti',
+    'Curried Chitterlings',
+    'pratos-principais',
     NULL,
-    'Na terceira temporada, Hannibal retorna com um antipasto — uma seleção de ingredientes italianos preparados com cuidado extremo. O episódio "Antipasto" é um retorno às origens, uma reafirmação de que Hannibal continua sendo o mestre absoluto da culinária. O antipasto é apresentado como um convite, uma promessa de prazeres culinários que estão por vir. Cada ingrediente é escolhido com precisão, cada apresentação é calculada. É um prato que fala sobre abundância e controle simultâneos — uma profusão de ingredientes, mas cada um em seu lugar exato.',
-    'Antipasto significa literalmente "antes do pasto" em italiano, referindo-se aos pratos servidos antes do prato principal em uma refeição italiana tradicional. O antipasto pode incluir uma variedade de ingredientes: carnes curadas, queijos, legumes em conserva, azeitonas, peixes em conserva, e muito mais. Historicamente, o antipasto era uma forma de aproveitar ingredientes preservados durante o inverno, transformando-os em um prato elegante e sofisticado. Um verdadeiro antipasto della casa é uma expressão da identidade culinária do chef — cada seleção reflete seu gosto, sua herança, e sua compreensão da harmonia de sabores.'
+    'Em "Roti" (Assado), Hannibal prepara chitterlings (tripas) ao curry — um prato que é tanto uma demonstração de técnica quanto um desafio aos preconceitos culinários. Chitterlings são um ingrediente que muitos consideram desagradável, mas quando preparadas corretamente, podem ser extraordinariamente saborosas. Para Hannibal, é um prato que fala sobre transformação e refinamento — a capacidade de elevar algo que é frequentemente descartado para algo verdadeiramente notável. O curry adiciona uma camada de sofisticação e exotismo.',
+    'Chitterlings (tripas de porco) são um ingrediente tradicional em muitas culinarias ao redor do mundo, particularmente na culinaria africana, caribenha e do sul dos Estados Unidos. Historicamente, eram um alimento de sobrevivência — uma forma de aproveitar todas as partes do animal. Quando preparadas corretamente, chitterlings podem ser extremamente saborosas. O curry é uma mistura de especiarias que remonta à culinária indiana e é agora usada em culinarias de todo o mundo. A combinação de chitterlings com curry é uma fusão criativa que demonstra a sofisticação culinária de Hannibal.'
 );
 
 -- Ingredientes da receita 8
 INSERT INTO ingredientes (receita_id, descricao, ordem) VALUES
-(8, '100g de presunto de Parma, fatiado finamente', 1),
-(8, '100g de mortadela, fatiada', 2),
-(8, '100g de salame italiano, fatiado', 3),
-(8, '100g de queijo parmesão em lascas', 4),
-(8, '100g de mozzarella fresca', 5),
-(8, '100g de azeitonas mistas (pretas e verdes)', 6),
-(8, '100g de legumes em conserva (pimentão, cebola, cenoura)', 7),
-(8, '100g de peperoncini (pimentas em conserva)', 8),
-(8, '50ml de azeite extra virgem', 9),
-(8, 'Pão tostado para acompanhamento', 10);
+(8, '500g de chitterlings (tripas de porco), limpas e cortadas', 1),
+(8, '3 colheres de sopa de pó de curry', 2),
+(8, '1 cebola grande, picada', 3),
+(8, '4 dentes de alho, minados', 4),
+(8, '1 colher de sopa de gengibre fresco ralado', 5),
+(8, '400ml de leite de coco', 6),
+(8, '200ml de caldo de carne', 7),
+(8, '2 tomates, picados', 8),
+(8, '2 colheres de sopa de azeite', 9),
+(8, 'Sal, pimenta e suco de limão a gosto', 10);
 
 -- Passos da receita 8
-INSERT INTO ingredientes (receita_id, descricao, ordem) VALUES
-(8, 'Organize todos os ingredientes em um grande prato ou tábua de madeira.', 1),
-(8, 'Dispon ha o presunto, mortadela e salame em dobras elegantes.', 2),
-(8, 'Coloque os queijos em grupos separados, com as lascas de parmesão em um monte.', 3),
-(8, 'Distribua as azeitonas, legumes em conserva e peperoncini em pequenas tigelas ou grupos.', 4),
-(8, 'Regue tudo com azeite extra virgem de qualidade premium.', 5),
-(8, 'Sirva com pão tostado fresco. A apresentação é tão importante quanto os ingredientes.', 6);
+INSERT INTO passos_preparo (receita_id, descricao, ordem) VALUES
+(8, 'Limpe bem os chitterlings em água fria. Cozinhe em água fervendo com um pouco de vinagre por 30 minutos até ficarem macios. Escorra e corte em pedaços pequenos.', 1),
+(8, 'Em uma panela grande, aqueça o azeite em fogo médio. Refogue a cebola, alho e gengibre até ficarem aromáticos, cerca de 3 minutos.', 2),
+(8, 'Adicione o pó de curry e mexa bem para cobrir a cebola. Cozinhe por 1 minuto.', 3),
+(8, 'Adicione os chitterlings já cozidos e mexa bem para cobrir com o curry.', 4),
+(8, 'Despeje o leite de coco e o caldo de carne. Adicione os tomates picados.', 5),
+(8, 'Deixe fervir, depois reduza o fogo e cozinhe em fogo baixo por 20-30 minutos até que o molho fique espesso e saboroso.', 6),
+(8, 'Tempere com sal, pimenta e suco de limão. Sirva quente com arroz ou pão.', 7);
 
 -- ============================================================
 
--- RECEITA 9: Panna Cotta com Calda de Frutas Vermelhas
+-- RECEITA 9: Silkie Soup
 INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidade) VALUES (
-    'T3E06 — Dolce',
-    'Panna Cotta com Calda de Frutas Vermelhas',
-    'sobremesas',
+    'T1EP12 — Releves',
+    'Silkie Soup',
+    'sopas',
     NULL,
-    'Em "Dolce" (Doce), Hannibal prepara uma panna cotta — um prato que é ao mesmo tempo simples e profundamente sofisticado. A panna cotta é branca, pura, quase imaculada — até que a calda de frutas vermelhas é despejada sobre ela, criando um contraste visual que é simultaneamente belo e perturbador. A câmera captura a cor vermelha escura da calda se espalhando pela panna cotta branca, criando padrões que lembram sangue em neve. É uma imagem que captura a essência de Hannibal: beleza e horror entrelaçados, elegância e violência coexistindo em perfeita harmonia.',
-    'Panna cotta significa literalmente "creme cozido" em italiano, e é um prato que remonta ao século XVI. A panna cotta tradicional é feita com creme de leite, açúcar e gelatina, cozida em banho-maria até ficar cremosa e suave. O prato é notável por sua simplicidade — apenas três ingredientes principais — e sua elegância. A panna cotta é frequentemente servida com frutas frescas ou caldas de frutas, criando um contraste de texturas e sabores. A cor vermelha das frutas vermelhas contra a brancura da panna cotta é um clássico da culinária italiana, e é precisamente esse contraste visual que torna o prato tão memorável.'
+    'Em "Releves" (Mudanças), Hannibal prepara uma sopa de Silkie — uma sopa tradicional da culinária chinesa feita com galinha Silkie, uma raça de galinha conhecida por sua carne preta e sua reputação medicinal. O episódio marca um ponto de virada na série, onde Hannibal começa a se envolver mais diretamente com Will Graham. A sopa é um prato que é tanto nutritivo quanto reconfortante, mas quando preparada por Hannibal, torna-se algo muito mais — uma oferenda que mascara intenções muito mais sinistras.',
+    'A galinha Silkie é uma raça de galinha originária da Ásia, particularmente da China, que é conhecida por sua carne preta e sua reputação medicinal. Na culinária tradicional chinesa, a sopa de Silkie é considerada um tônico de saúde e é frequentemente servida para fortalecer o corpo e melhorar o bem-estar geral. A sopa é tipicamente feita com galinha Silkie, cogumelos medicinais, ginseng e outras ervas. O prato é um exemplo da filosofia culinária chinesa de que a comida é medicina.'
 );
 
 -- Ingredientes da receita 9
 INSERT INTO ingredientes (receita_id, descricao, ordem) VALUES
-(9, '500ml de creme de leite integral', 1),
-(9, '100g de açúcar', 2),
-(9, '1 colher de chá de extrato de baunilha', 3),
-(9, '2 folhas de gelatina (ou 1 colher de chá de gelatina em pó)', 4),
-(9, '300g de frutas vermelhas mistas (morango, framboesa, amora)', 5),
-(9, '100g de açúcar para a calda', 6),
-(9, '50ml de água', 7);
+(9, '1 galinha Silkie inteira (ou 800g de carne de Silkie)', 1),
+(9, '10 cogumelos shiitake secos', 2),
+(9, '5 datas vermelhas chinesas (jujubas)', 3),
+(9, '1 raiz de ginseng (ou 1 colher de chá de pó de ginseng)', 4),
+(9, '6 talos de goji berries', 5),
+(9, '6 fatias de raiz de gengibre fresco', 6),
+(9, '2 litros de água filtrada', 7),
+(9, 'Sal a gosto', 8);
 
 -- Passos da receita 9
 INSERT INTO passos_preparo (receita_id, descricao, ordem) VALUES
-(9, 'Se usar gelatina em folhas, hidrate em água fria por 5 minutos. Se usar em pó, dissolva em 3 colheres de sopa de água morna.', 1),
-(9, 'Em uma panela, combine o creme de leite com 100g de açúcar e o extrato de baunilha. Aquça até quase ferver, mas não deixe fervir.', 2),
-(9, 'Retire do fogo e adicione a gelatina hidratada, mexendo bem até dissolver completamente.', 3),
-(9, 'Despeje a mistura em taças ou formas de panna cotta. Deixe esfriar até temperatura ambiente.', 4),
-(9, 'Refrigere por pelo menos 4 horas (ou durante a noite) até ficar firme.', 5),
-(9, 'Para a calda: combine as frutas vermelhas com 100g de açúcar e 50ml de água em uma panela. Cozinhe em fogo médio por 10 minutos, mexendo ocasionalmente.', 6),
-(9, 'Coe a calda para remover as sementes, se desejar uma textura mais suave.', 7),
-(9, 'Desenforme a panna cotta em um prato ou sirva na própria taça. Despeje a calda de frutas vermelhas sobre a panna cotta.', 8),
-(9, 'Sirva gelado, com a calda vermelha criando um contraste visual impressionante.', 9);
+(9, 'Limpe a galinha Silkie em água fria. Corte em pedaços grandes.', 1),
+(9, 'Hidrate os cogumelos shiitake em água morna por 20 minutos. Reserve a água.', 2),
+(9, 'Em uma panela grande, leve a água a fervir. Adicione a galinha e deixe fervir por 2 minutos. Retire a galinha e descarte a água (isso remove as impurezas).', 3),
+(9, 'Coloque a galinha em uma panela limpa com 2 litros de água fresca. Leve a fervir.', 4),
+(9, 'Adicione o gengibre, os cogumelos shiitake, as datas, a raiz de ginseng e as goji berries.', 5),
+(9, 'Reduza o fogo e deixe cozinhar em fogo baixo por 2-3 horas até que a galinha esteja muito macia e o caldo tenha absorvido todos os sabores.', 6),
+(9, 'Tempere com sal a gosto. Sirva quente em tigelas.', 7);
 
 -- ============================================================
 
--- RECEITA 10: Agneau Rôti — Cordeiro Assado com Ervas Provençais
+-- RECEITA 10: Grand Fruit and Flower Garnished Kalua-Roast Leg
 INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidade) VALUES (
-    'T3E13 — The Wrath of the Lamb',
-    'Agneau Rôti — Cordeiro Assado com Ervas Provençais',
+    'T3EP13 — The Wrath of The Lamb',
+    'Grand Fruit and Flower Garnished Kalua-Roast Leg',
     'pratos-principais',
     NULL,
-    'No episódio final da série, "The Wrath of the Lamb" (A Ira do Cordeiro), Hannibal prepara um cordeiro assado — um retorno aos clássicos, mas elevado a um nível de perfeição que apenas Hannibal pode alcançar. O título do episódio é uma referência bíblica, e o cordeiro é um símbolo carregado de significado: inocência, sacrifício, redenção. Mas em Hannibal, o cordeiro é também um ato final de desafio — uma reafirmação de que Hannibal permanece o mestre absoluto de sua arte, mesmo quando tudo ao seu redor desaba. A câmera captura o cordeiro dourado, as ervas aromáticas, o vapor subindo do prato. É um momento de beleza pura, um último ato de criação antes do caos final.',
-    'O cordeiro assado com ervas provençais é um clássico da culinária francesa, particularmente associado à região da Provença, no sul da França. As ervas provençais — tomilho, alecrim, manjerona, sálvia — crescem selvagens nas colinas rochosas da Provença e têm sido usadas na culinária local por séculos. O cordeiro, com sua carne delicada e sabor distinto, é considerado uma iguaria em toda a Europa. O prato "Agneau Rôti" é uma celebração da culinária clássica francesa, uma demonstração de técnica e compreensão dos sabores. Para Hannibal, é também um ato de defiance — uma afirmação de que, não importa o que aconteça, ele permanece um artista.'
+    'No episódio final da série, "The Wrath of the Lamb" (A Ira do Cordeiro), Hannibal prepara um prato final e magnífico: uma perna de cordeiro kalua assada e decorada com frutas e flores. Este é o auge de sua arte culinária — um prato que é tanto uma celebração quanto um ato de desafio. O título do episódio é uma referência bíblica ao Cordeiro de Deus, e o prato é carregado de simbolismo: inocência, sacrifício, redenção, e a recusa de Hannibal em aceitar qualquer uma dessas noções. A decoração com frutas e flores adiciona um elemento de beleza quase irreal, transformando o prato em uma obra de arte que transcende a culinária.',
+    'O kalua é um método tradicional de cozimento havaiano que envolve cozinhar carne em um forno subterrâneo chamado imu. A carne cozida desta forma fica extremamente macia e absorve os sabores da fumaça e das ervas. Quando preparada em um forno convencional, a técnica kalua envolve cozimento longo e lento em fogo baixo. A decoração com frutas e flores é uma técnica moderna que transforma o prato em uma obra de arte visual. O prato final é uma celebração da culinária, da beleza, e da criatividade — e, para Hannibal, uma afirmação final de seu domínio absoluto sobre a arte culinária.'
 );
 
 -- Ingredientes da receita 10
 INSERT INTO ingredientes (receita_id, descricao, ordem) VALUES
-(10, '1 perna de cordeiro (cerca de 1,5kg)', 1),
+(10, '1 perna de cordeiro (cerca de 2kg)', 1),
 (10, '6 dentes de alho, fatiados', 2),
-(10, '3 colheres de sopa de ervas provençais secas (ou 6 colheres de sopa frescas)', 3),
-(10, '100ml de azeite extra virgem', 4),
-(10, '200ml de vinho tinto', 5),
-(10, '200ml de caldo de carne', 6),
-(10, '2 cebolas médias, cortadas em quartos', 7),
-(10, '500g de batatas pequenas', 8),
-(10, 'Sal, pimenta-do-reino e suco de limão a gosto', 9);
+(10, '3 colheres de sopa de sal marinho', 3),
+(10, '2 colheres de sopa de pimenta-do-reino', 4),
+(10, '2 colheres de sopa de alecrim fresco picado', 5),
+(10, '2 colheres de sopa de tomilho fresco picado', 6),
+(10, '100ml de azeite extra virgem', 7),
+(10, '200ml de vinho branco', 8),
+(10, '300ml de caldo de carne', 9),
+(10, 'Frutas variadas para decoração (maçã, pera, uva, romã)', 10),
+(10, 'Flores comestíveis para decoração (rosas, violetas, calêndula)', 11),
+(10, 'Microgreens e ervas frescas para finalizar', 12);
 
 -- Passos da receita 10
 INSERT INTO passos_preparo (receita_id, descricao, ordem) VALUES
-(10, 'Pré-aqueça o forno a 200°C.', 1),
+(10, 'Pré-aqueça o forno a 160°C.', 1),
 (10, 'Com uma faca pequena, faça pequenos cortes na pele do cordeiro e insira os fatias de alho nos cortes.', 2),
-(10, 'Esfregue o cordeiro com as ervas provençais, sal, pimenta e azeite, cobrindo toda a superfície.', 3),
-(10, 'Coloque o cordeiro em uma assadeira. Distribua as cebolas e batatas ao redor.', 4),
-(10, 'Asse por 20 minutos a 200°C, depois reduza a temperatura para 180°C e continue assando por mais 1 hora (para carne média-rara).', 5),
-(10, 'Retire o cordeiro do forno e deixe descansar por 10 minutos (isso permite que os sucos se redistribuam).', 6),
-(10, 'Coloque a assadeira no fogão em fogo médio. Despeje o vinho tinto e raspe os sucos caramelizados do fundo.', 7),
-(10, 'Adicione o caldo de carne e deixe reduzir por 5 minutos. Tempere com sal, pimenta e suco de limão.', 8),
-(10, 'Fatia o cordeiro e sirva com as batatas, cebolas e o molho reduzido.', 9),
-(10, 'Sirva quente, com um copo de vinho tinto de qualidade.', 10);
+(10, 'Esfregue o cordeiro com sal, pimenta, alecrim e tomilho, cobrindo toda a superfície.', 3),
+(10, 'Coloque o cordeiro em uma assadeira. Regue com azeite extra virgem.', 4),
+(10, 'Asse por 3-4 horas (para carne bem cozida) ou 2,5-3 horas (para carne média), regando ocasionalmente com o suco da assadeira.', 5),
+(10, 'Retire o cordeiro do forno e deixe descansar por 15 minutos.', 6),
+(10, 'Coloque a assadeira no fogão em fogo médio. Despeje o vinho branco e raspe os sucos caramelizados.', 7),
+(10, 'Adicione o caldo de carne e deixe reduzir por 5 minutos. Tempere com sal e pimenta.', 8),
+(10, 'Fatia o cordeiro. Disponha em um prato grande e elegante.', 9),
+(10, 'Decore o prato com frutas variadas (maçã, pera, uva, romã) e flores comestíveis, criando uma composição visual impressionante.', 10),
+(10, 'Finalize com microgreens e ervas frescas. Sirva o molho à parte.', 11),
+(10, 'Sirva este prato final como um ato de criação e defiance.', 12);

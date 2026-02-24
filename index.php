@@ -71,7 +71,7 @@ $tituloPagina = 'Receitas — Cozinha de Lecter';
                 <h1>A Mesa de Lecter</h1>
                 <div class="divisor"></div>
                 <p>
-                    Dez pratos. Dez episódios. Uma análise gastronômica e cinematográfica 
+                    Uma análise gastronômica e cinematográfica 
                     das refeições mais perturbadoramente belas da televisão.
                 </p>
             </section>
