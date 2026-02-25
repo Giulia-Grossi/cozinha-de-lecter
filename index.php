@@ -85,7 +85,7 @@ $tituloPagina = 'Receitas — Cozinha de Lecter';
                     🍽️ Todas as Receitas
                 </a>
 
-                <!-- Links para cada categoria (gerados dinamicamente) -->
+                <!-- Links para cada categoria -->
                 <?php foreach ($categorias as $cat): ?>
                     <a href="index.php?categoria=<?= urlencode($cat) ?>" 
                        class="<?= ($categoriaFiltro === $cat) ? 'ativo' : '' ?>">
