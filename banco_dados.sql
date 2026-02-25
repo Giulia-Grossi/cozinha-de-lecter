@@ -68,7 +68,7 @@ INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidad
     'T1EP1 — Aperitif',
     'Beef Bourguignonne',
     'pratos-principais',
-    NULL,
+    'images/receita-01.jpg',
     'No episódio piloto "Aperitif", Hannibal Lecter é apresentado ao espectador não como um monstro, mas como um chef de talento excepcional. A primeira cena em que o vemos cozinhando estabelece o tom para toda a série: a câmera se move lentamente enquanto Hannibal prepara um Beef Bourguignonne com precisão cirúrgica. Este é um prato clássico da culinária francesa, que requer paciência, técnica e uma compreensão profunda dos sabores. O vinho tinto, a carne macia, os legumes caramelizados — tudo é uma metáfora para a sofisticação de Hannibal, que mascara algo muito mais sinistro por baixo.',
     'Beef Bourguignonne é um prato clássico da região de Borgonha, na França, que remonta ao século XVI. Historicamente, era um prato de camponeses que aproveitava cortes de carne menos nobres e os transformava em algo extraordinário através de cozimento lento e vinho. A técnica de braising (cozimento em molho) permite que a carne se torne extremamente macia enquanto absorve os sabores do vinho, das ervas e dos legumes. O prato ganhou fama internacional através do livro "Mastering the Art of French Cooking" de Julia Child, publicado em 1961.'
 );
@@ -110,7 +110,7 @@ INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidad
     'T1EP2 — Amuse-Bouche',
     'Amuse-Bouche',
     'entradas',
-    NULL,
+    'images/receita-02.jpg',
     'Em "Amuse-Bouche", Hannibal prepara um pequeno apertivo — uma entrada que é tanto uma demonstração de técnica quanto um convite para o que está por vir. O amuse-bouche é um conceito francês que significa literalmente "diversão para a boca" — um pequeno prato servido antes do menu principal, projetado para despertar o paladar e estabelecer o tom para a refeição. Para Hannibal, é também um ato de sedução, uma forma de ganhar a confiança de seus convidados através da culinária.',
     'O amuse-bouche é uma tradição da alta culinária francesa que ganhou popularidade no século XX. É um prato que não aparece no menu — é uma surpresa oferecida pelo chef. O objetivo é criar uma primeira impressão memorável, demonstrando a criatividade e a técnica do chef. Um verdadeiro amuse-bouche é pequeno (geralmente apenas um ou dois bocados), visualmente impressionante, e oferece uma explosão de sabor. Para Hannibal, o amuse-bouche é uma metáfora perfeita: pequeno, refinado, e potencialmente perigoso.'
 );
@@ -141,7 +141,7 @@ INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidad
     'T1EP4 — Oeuf',
     'Eggs with Sausages',
     'entradas',
-    NULL,
+    'images/receita-03.jpg',
     'Em "Oeuf" (Ovo), Hannibal prepara um prato que é simultaneamente simples e sofisticado: ovos com salsichas. O episódio marca um ponto de virada na série, onde os crimes de Hannibal começam a se tornar mais evidentes. O prato é um contraste interessante — ovos são símbolos de pureza e novo começo, enquanto as salsichas sugerem algo mais terreno e potencialmente sinistro. Para Hannibal, é um prato que captura essa dualidade: beleza e horror entrelaçados.',
     'Ovos e salsichas são uma combinação clássica que aparece em culinarias de todo o mundo. Em França, as salsichas de qualidade (como a saucisse de Toulouse) são frequentemente servidas com ovos preparados de várias formas. A qualidade das salsichas é crucial — uma boa salsicha deve ter uma proporção equilibrada de carne, gordura e temperos. Hannibal, é claro, insistiria em salsichas de qualidade excepcional, preparadas com precisão e servidas com técnica impecável.'
 );
@@ -171,7 +171,7 @@ INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidad
     'T1EP6 — Entree',
     'Wine Jelly',
     'sobremesas',
-    NULL,
+    'images/receita-04.jpg',
     'Em "Entree", Hannibal prepara uma geleia de vinho — um prato que é tanto uma sobremesa quanto uma obra de arte. A geleia de vinho é translúcida, delicada, e captura a essência do vinho em forma sólida. O episódio marca um momento em que Hannibal começa a revelar mais de sua verdadeira natureza, e a geleia de vinho é uma metáfora perfeita: algo que parece frágil na superfície, mas que possui uma estrutura interna complexa e bem definida.',
     'A geleia de vinho é um prato clássico da culinária francesa que remonta ao século XVIII. Historicamente, era feita com gelatina animal (caldo de ossos reduzido) e vinho, criando um prato que era tanto uma demonstração de técnica quanto de riqueza — pois gelatina era cara e trabalhosa de produzir. A geleia de vinho é frequentemente servida como uma sobremesa elegante em jantares refinados, e é um prato que requer precisão e paciência.'
 );
@@ -204,7 +204,7 @@ INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidad
     'T1EP8 — Fromage',
     'Paella on the Rocks',
     'pratos-principais',
-    NULL,
+    'images/receita-05.jpg',
     'Em "Fromage" (Queijo), Hannibal prepara uma paella em pedras — um prato que combina a culinária espanhola com uma técnica teatral. O uso de pedras quentes para cozinhar é uma técnica antiga que adiciona um elemento de drama e espetáculo à apresentação. A paella em si é um prato de abundância e comunidade, mas quando preparada por Hannibal, torna-se uma declaração de seu domínio absoluto sobre a culinária e sobre aqueles ao seu redor.',
     'A paella é um prato tradicional da região de Valência, na Espanha, que remonta ao século XVIII. Historicamente, era um prato de camponeses que aproveitava ingredientes locais — arroz, legumes, frutos do mar. A paella ganhou fama internacional e é agora considerada um símbolo da culinária espanhola. A técnica de cozinhar em pedras quentes é uma variação moderna que adiciona um elemento de espetáculo e dramaticidade à apresentação. O prato é frequentemente servido em jantares de grupo, o que o torna perfeito para Hannibal — uma forma de reunir suas vítimas em torno de uma mesa.'
 );
@@ -243,7 +243,7 @@ INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidad
     'T1EP9 — Trou Normand',
     'Tenderloin and Lotus',
     'pratos-principais',
-    NULL,
+    'images/receita-06.jpg',
     'Em "Trou Normand" (Buraco Normando), Hannibal prepara um filé mignon com raiz de lótus — um prato que combina a culinária francesa com influências asiáticas. O "trou normand" é tradicionalmente um interlúdio gelado (como um sorbet) servido entre pratos em um jantar de múltiplos cursos para "limpar o palato". Mas aqui, Hannibal subverte a tradição, criando um prato que é tanto uma homenagem quanto uma reinterpretação. O filé mignon é um corte nobre, e a raiz de lótus adiciona um elemento de exotismo e sofisticação.',
     'O filé mignon é considerado o corte mais nobre da carne vermelha, conhecido por sua maciez e sabor delicado. A raiz de lótus (Nelumbo nucifera) é um ingrediente tradicional na culinária asiática, particularmente na culinária chinesa e japonesa. Tem um sabor ligeiramente adocicado e uma textura crocante quando cozida corretamente. A combinação de filé mignon com raiz de lótus é uma fusão criativa que demonstra a sofisticação culinária de Hannibal e sua disposição em explorar ingredientes de diferentes culturas.'
 );
@@ -278,7 +278,7 @@ INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidad
     'T1EP10 — Buffet Froid',
     'Jamon Iberico',
     'entradas',
-    NULL,
+    'images/receita-07.jpg',
     'Em "Buffet Froid" (Bufê Frio), Hannibal prepara presunto ibérico — um prato que é tão simples quanto sofisticado. O presunto ibérico é um ingrediente de qualidade excepcional que requer pouca preparação além de uma fatiação perfeita e uma apresentação elegante. O episódio marca um ponto em que Hannibal começa a revelar sua verdadeira natureza de forma mais aberta, e o presunto ibérico é uma metáfora perfeita: algo que parece simples na superfície, mas que possui uma complexidade e profundidade extraordinárias.',
     'O presunto ibérico é um dos presuntos mais refinados do mundo, produzido a partir de porcos ibéricos criados em liberdade na Península Ibérica. O processo de cura pode levar de 2 a 10 anos, dependendo da qualidade desejada. O presunto ibérico de "pata negra" (feito de porcos com cascos pretos) é considerado o mais premium e é frequentemente servido em fatias ultrafinas como entrada em jantares refinados. A qualidade do presunto ibérico é tão alta que requer pouca preparação — apenas uma fatiação perfeita e uma apresentação elegante.'
 );
@@ -307,7 +307,7 @@ INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidad
     'T1EP11 — Roti',
     'Curried Chitterlings',
     'pratos-principais',
-    NULL,
+    'images/receita-08.jpg',
     'Em "Roti" (Assado), Hannibal prepara chitterlings (tripas) ao curry — um prato que é tanto uma demonstração de técnica quanto um desafio aos preconceitos culinários. Chitterlings são um ingrediente que muitos consideram desagradável, mas quando preparadas corretamente, podem ser extraordinariamente saborosas. Para Hannibal, é um prato que fala sobre transformação e refinamento — a capacidade de elevar algo que é frequentemente descartado para algo verdadeiramente notável. O curry adiciona uma camada de sofisticação e exotismo.',
     'Chitterlings (tripas de porco) são um ingrediente tradicional em muitas culinarias ao redor do mundo, particularmente na culinaria africana, caribenha e do sul dos Estados Unidos. Historicamente, eram um alimento de sobrevivência — uma forma de aproveitar todas as partes do animal. Quando preparadas corretamente, chitterlings podem ser extremamente saborosas. O curry é uma mistura de especiarias que remonta à culinária indiana e é agora usada em culinarias de todo o mundo. A combinação de chitterlings com curry é uma fusão criativa que demonstra a sofisticação culinária de Hannibal.'
 );
@@ -342,7 +342,7 @@ INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidad
     'T1EP12 — Releves',
     'Silkie Soup',
     'sopas',
-    NULL,
+    'images/receita-09.jpg',
     'Em "Releves" (Mudanças), Hannibal prepara uma sopa de Silkie — uma sopa tradicional da culinária chinesa feita com galinha Silkie, uma raça de galinha conhecida por sua carne preta e sua reputação medicinal. O episódio marca um ponto de virada na série, onde Hannibal começa a se envolver mais diretamente com Will Graham. A sopa é um prato que é tanto nutritivo quanto reconfortante, mas quando preparada por Hannibal, torna-se algo muito mais — uma oferenda que mascara intenções muito mais sinistras.',
     'A galinha Silkie é uma raça de galinha originária da Ásia, particularmente da China, que é conhecida por sua carne preta e sua reputação medicinal. Na culinária tradicional chinesa, a sopa de Silkie é considerada um tônico de saúde e é frequentemente servida para fortalecer o corpo e melhorar o bem-estar geral. A sopa é tipicamente feita com galinha Silkie, cogumelos medicinais, ginseng e outras ervas. O prato é um exemplo da filosofia culinária chinesa de que a comida é medicina.'
 );
@@ -375,7 +375,7 @@ INSERT INTO receitas (episodio, titulo, categoria, imagem, descricao, curiosidad
     'T3EP13 — The Wrath of The Lamb',
     'Grand Fruit and Flower Garnished Kalua-Roast Leg',
     'pratos-principais',
-    NULL,
+    'images/receita-10.jpg',
     'No episódio final da série, "The Wrath of the Lamb" (A Ira do Cordeiro), Hannibal prepara um prato final e magnífico: uma perna de cordeiro kalua assada e decorada com frutas e flores. Este é o auge de sua arte culinária — um prato que é tanto uma celebração quanto um ato de desafio. O título do episódio é uma referência bíblica ao Cordeiro de Deus, e o prato é carregado de simbolismo: inocência, sacrifício, redenção, e a recusa de Hannibal em aceitar qualquer uma dessas noções. A decoração com frutas e flores adiciona um elemento de beleza quase irreal, transformando o prato em uma obra de arte que transcende a culinária.',
     'O kalua é um método tradicional de cozimento havaiano que envolve cozinhar carne em um forno subterrâneo chamado imu. A carne cozida desta forma fica extremamente macia e absorve os sabores da fumaça e das ervas. Quando preparada em um forno convencional, a técnica kalua envolve cozimento longo e lento em fogo baixo. A decoração com frutas e flores é uma técnica moderna que transforma o prato em uma obra de arte visual. O prato final é uma celebração da culinária, da beleza, e da criatividade — e, para Hannibal, uma afirmação final de seu domínio absoluto sobre a arte culinária.'
 );
